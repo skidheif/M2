@@ -21,6 +21,8 @@ public class Main
 
     public static void main(String[] args)
     {
+        //расчет минимальной суммы дохода для инвестирования
+        calculateInvestSum();
         // вечный цикл
         while(true)
         {
@@ -84,5 +86,26 @@ public class Main
                 internetAccessCharge +
                 assistantSalary +
                 financeManagerSalary;
+    }
+
+    public static void calculateInvestSum() {
+        System.out.println("Введите сумму доходов компании за месяц " +
+                "(от 200 до 900 тысяч рублей): ");
+        int incomeSum = (new Scanner(System.in)).nextInt();
+        if (!checkIncomeRange(incomeSum)) {
+            System.out.println("Введенное значение не попало в границы, поэтому не удалось рассчитать минимальную сумму");
+        } else {
+            double managerSalary = incomeSum * managerPercent;
+            double pureIncome = incomeSum - managerSalary - calculateFixedCharges();
+            double taxAmount = mainTaxPercent * pureIncome;
+            double pureIncomeAfterTax = pureIncome - taxAmount;
+            if (pureIncomeAfterTax < 0) {
+                System.out.println("Недостаточно средств для инвестиций, заработайте больше");
+            } else {
+                System.out.println(pureIncomeAfterTax >= minInvestmentsAmount ?
+                        "Вы можете инвестировать данную сумму, поздравляем. Ваш взнос = " + pureIncomeAfterTax :
+                        "Данная сумма меньше первоначального взноса в 100000. Ваш взнос = " + pureIncomeAfterTax);
+            }
+        }
     }
 }
