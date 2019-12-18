@@ -5,12 +5,18 @@ import java.util.Scanner;
 
 public class RoadController
 {
+    //переменная типа double
     private static double passengerCarMaxWeight = 3500.0; // kg
+    //переменная типа int
     private static int passengerCarMaxHeight = 2000; // mm
+    //переменная типа int
     private static int controllerMaxHeight = 4000; // mm
 
+    //переменная типа int
     private static int passengerCarPrice = 100; // RUB
+    //переменная типа int
     private static int cargoCarPrice = 250; // RUB
+    //переменная типа int
     private static int vehicleAdditionalPrice = 200; // RUB
 
     public static void main(String[] args)
@@ -18,6 +24,7 @@ public class RoadController
         System.out.println("Сколько автомобилей сгенерировать?");
 
         Scanner scanner = new Scanner(System.in);
+        //переменная типа int
         int carsCount = scanner.nextInt();
 
         for(int i = 0; i < carsCount; i++)
@@ -46,7 +53,9 @@ public class RoadController
      */
     private static int calculatePrice(Car car)
     {
+        //переменная типа int
         int carHeight = car.height;
+        //переменная типа int
         int price = 0;
         if (carHeight > controllerMaxHeight)
         {
@@ -55,6 +64,7 @@ public class RoadController
         }
         else if (carHeight > passengerCarMaxHeight)
         {
+            //переменная типа double
             double weight = car.weight;
             //Грузовой автомобиль
             if (weight > passengerCarMaxWeight)
