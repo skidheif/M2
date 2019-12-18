@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
+//программа для проверки может ли компания инвестировать, или с ее текущим бюджетом не стоит этого делать
 public class Main
 {
+    //переменные различных типов, int, double
     private static int minIncome = 200000;
     private static int maxIncome = 900000;
 
@@ -19,25 +21,34 @@ public class Main
 
     public static void main(String[] args)
     {
+        // вечный цикл
         while(true)
         {
+            //вывод на консоль
             System.out.println("Введите сумму доходов компании за месяц " +
                 "(от 200 до 900 тысяч рублей): ");
+            //ввод значения
             int income = (new Scanner(System.in)).nextInt();
 
+            //проверка введенного значения (вызов метода checkIncomeRange)
             if(!checkIncomeRange(income)) {
                 continue;
             }
 
+            //расчет зарплаты менеджера
             double managerSalary = income * managerPercent;
-            double pureIncome = income - managerSalary -
-                calculateFixedCharges();
+            //расчет бюджета
+            double pureIncome = income - managerSalary - calculateFixedCharges();
+            //расчет налогов
             double taxAmount = mainTaxPercent * pureIncome;
+            //расчет возможности инвестировании, должно быть больше 100к для  boolean canMakeInvestments = true
             double pureIncomeAfterTax = pureIncome - taxAmount;
 
+            // boolean переменная для проверки можно ли инвестировать или нет
             boolean canMakeInvestments = pureIncomeAfterTax >=
                 minInvestmentsAmount;
 
+            //вывод на экран (тут есть тернарный, проверка бюджета и прочая
             System.out.println("Зарплата менеджера: " + managerSalary);
             System.out.println("Общая сумма налогов: " +
                 (taxAmount > 0 ? taxAmount : 0));
@@ -49,6 +60,7 @@ public class Main
         }
     }
 
+    //метод для проверки входит ли введенное пользователем число в нужные границы
     private static boolean checkIncomeRange(int income)
     {
         if(income < minIncome)
@@ -64,6 +76,7 @@ public class Main
         return true;
     }
 
+    //метод расчета фиксированных расходов
     private static int calculateFixedCharges()
     {
         return officeRentCharge +
